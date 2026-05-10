@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>2026 東京富士山｜家族旅行手冊</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -10,13 +10,13 @@
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap');
         
         :root {
-            --bg-base: #FAF9F6; /* 羊皮紙白 */
+            --bg-base: #FAF9F6;
             --text-main: #1C1C1C;
             --text-sub: #757575;
-            --accent: #A89F91; /* 灰褐色 */
-            --gold: #D4A373; /* 金褐色 */
-            --stay-bg: #F5F4F0; /* 統一住宿底色 */
-            --gourmet-bg: #F0F4F8; /* 甜點/美食專用色 */
+            --accent: #A89F91;
+            --gold: #D4A373;
+            --stay-bg: #F5F4F0; 
+            --gourmet-bg: #F0F4F8;
             --safe-area-bottom: env(safe-area-inset-bottom, 20px);
             --nav-height: calc(60px + var(--safe-area-bottom));
         }
@@ -26,7 +26,8 @@
             background-color: var(--bg-base);
             color: var(--text-main);
             margin: 0; padding: 0;
-            height: 100vh;
+            min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -38,7 +39,7 @@
         /* --- 頂部欄 --- */
         .app-header {
             background: rgba(250, 249, 246, 0.95);
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px);
             padding: calc(env(safe-area-inset-top, 10px) + 12px) 24px 12px;
             display: flex;
             justify-content: space-between;
@@ -54,111 +55,115 @@
             padding-bottom: var(--nav-height);
             scroll-behavior: smooth;
         }
+        .hide-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+
 
         /* --- 首頁概覽 --- */
         .hero-section {
-            padding: 40px 24px 20px;
-            text-align: left;
+            padding: 48px 24px 32px;
         }
-        .hero-title { font-size: 2.2rem; line-height: 1.3; letter-spacing: -0.02em; font-weight: 900; }
-        .hero-subtitle { font-size: 0.75rem; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 10px; font-weight: 700; }
+        .hero-title { font-size: 2.2rem; line-height: 1.4; font-weight: 900; letter-spacing: -0.02em; }
+        .hero-subtitle { font-size: 0.8rem; letter-spacing: 0.3em; color: var(--accent); margin-bottom: 12px; font-weight: 700; text-transform: uppercase; }
 
         .flight-card {
             background: white;
             margin: 0 24px 32px;
-            border-radius: 4px;
-            padding: 24px;
+            border-radius: 8px;
+            padding: 28px 24px;
             border: 1px solid #EAE8E2;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 25px rgba(0,0,0,0.02);
         }
-        .flight-row { display: flex; justify-content: space-between; align-items: center; }
-        .flight-code { font-size: 0.65rem; font-weight: 700; color: var(--accent); border: 1px solid #EAE8E2; padding: 2px 6px; border-radius: 2px; }
-        
-        /* 移除飛機圖示，僅保留純線條 */
-        .flight-line { 
-            flex: 1; 
-            border-bottom: 1px solid #EAE8E2; 
-            margin: 0 15px; 
-            position: relative; 
-            height: 1px;
-        }
+        .flight-times { display: flex; justify-content: space-between; align-items: center; margin: 16px 0; }
+        .flight-city h2 { font-size: 2rem; font-weight: 900; line-height: 1; margin-bottom: 4px; }
+        .flight-city p { font-size: 0.75rem; font-weight: 700; color: var(--text-sub); }
+        .flight-line-spacer { flex: 1; height: 1px; border-bottom: 1px solid #EAE8E2; margin: 0 20px; position: relative; top: -10px; }
 
         /* --- 行程導航 --- */
-        .sticky-date-nav {
+        .sticky-nav {
             position: sticky;
             top: 0;
             background: rgba(250, 249, 246, 0.98);
-            padding: 12px 20px;
+            padding: 14px 20px;
             z-index: 90;
             border-bottom: 1px solid #EAE8E2;
         }
-        .date-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
-        .date-btn {
-            padding: 8px 0;
+        .date-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+        .date-tab {
+            padding: 10px 0;
             text-align: center;
-            border-radius: 4px;
-            transition: 0.3s;
+            border-radius: 6px;
+            transition: all 0.3s;
             color: var(--text-sub);
         }
-        .date-btn.active {
+        .date-tab.active {
             background: var(--text-main);
             color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-        .date-btn .d-label { font-size: 0.6rem; display: block; font-weight: 700; }
-        .date-btn .d-num { font-size: 1.1rem; font-weight: 900; display: block; line-height: 1; margin-top: 2px; }
+        .date-tab span:first-child { font-size: 0.6rem; display: block; font-weight: 700; margin-bottom: 2px; opacity: 0.6; }
+        .date-tab span:last-child { font-size: 1.1rem; font-weight: 900; display: block; line-height: 1; }
 
-        /* --- 時間軸 --- */
-        .timeline-wrapper { padding: 24px; position: relative; }
-        .timeline-line {
+        /* --- 時間軸行程 --- */
+        .timeline-container { padding: 32px 24px; position: relative; }
+        .timeline-v-line {
             position: absolute;
-            left: 36px; top: 30px; bottom: 30px;
+            left: 39px; top: 40px; bottom: 40px;
             width: 1px;
             background: #EAE8E2;
         }
-        .timeline-item { position: relative; padding-left: 44px; margin-bottom: 32px; }
-        .timeline-marker {
+        .timeline-item { position: relative; padding-left: 48px; margin-bottom: 36px; }
+        .timeline-node {
             position: absolute;
-            left: 9px; top: 4px;
+            left: 12px; top: 6px;
             width: 7px; height: 7px;
             background: var(--bg-base);
             border: 2px solid var(--text-main);
             border-radius: 50%;
-            z-index: 2;
+            z-index: 5;
         }
 
         .event-card {
             background: white;
             border: 1px solid #F0EFEA;
-            padding: 18px;
-            border-radius: 2px;
+            padding: 20px;
+            border-radius: 4px;
             position: relative;
         }
-        .time-tag {
+        .time-capsule {
             font-size: 0.65rem;
             font-weight: 800;
             color: white;
             background: var(--text-main);
-            padding: 3px 10px;
+            padding: 4px 12px;
             display: inline-block;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             letter-spacing: 0.05em;
+            border-radius: 2px;
         }
-
-        /* 統一住宿與美食樣式 */
-        .stay-card-unified { background-color: var(--stay-bg); border-color: #E6E5E0; }
-        .gourmet-card { background-color: var(--gourmet-bg); border-color: #D1DDE6; }
         
-        .stay-time-tag { background: var(--gold); }
-        .gourmet-time-tag { background: #5E7A8C; } /* 灰藍標籤 */
+        .stay-card { background-color: var(--stay-bg); border-color: #E6E5E0; }
+        .stay-tag { background: var(--gold); }
+        .gourmet-card { background-color: var(--gourmet-bg); border-color: #D1DDE6; }
+        .gourmet-tag { background: #5E7A8C; }
 
-        .event-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
-        .event-desc { font-size: 0.85rem; color: var(--text-sub); line-height: 1.7; font-weight: 300; }
-        .text-sub { color: var(--text-sub); }
-        .hide-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .event-h { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
+        .event-p { font-size: 0.9rem; color: var(--text-sub); line-height: 1.7; font-weight: 300; }
+        
+        /* 地址區塊 */
+        .address-box { 
+            margin-top: 10px; 
+            font-size: 0.75rem; 
+            color: var(--text-sub); 
+            border-top: 1px solid rgba(0,0,0,0.05); 
+            padding-top: 10px; 
+            line-height: 1.4;
+        }
+        .address-box i { margin-right: 4px; font-size: 0.8rem; }
+        .hours-text { color: #5E7A8C; font-weight: 700; margin-bottom: 4px; display: block; }
 
         /* --- 底部導航 --- */
-        .footer-nav {
+        .footer-tabs {
             position: fixed;
             bottom: 0; left: 0; right: 0;
             background: white;
@@ -168,17 +173,16 @@
             border-top: 1px solid #F0EFEA;
             z-index: 1000;
         }
-        .nav-link {
+        .tab-item {
             flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            color: #C2C1BD; font-size: 0.65rem; font-weight: 700; transition: 0.3s;
+            color: #C2C1BD; font-size: 0.7rem; font-weight: 700; transition: 0.3s;
         }
-        .nav-link.active { color: var(--text-main); }
-        .nav-link i { font-size: 1.1rem; margin-bottom: 4px; }
+        .tab-item.active { color: var(--text-main); }
+        .tab-item i { font-size: 1.2rem; margin-bottom: 4px; }
 
-        /* 動畫 */
-        .section-content { display: none; }
-        .section-content.active { display: block; animation: fadeIn 0.6s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .view-pane { display: none; }
+        .view-pane.active { display: block; animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
     </style>
 </head>
@@ -186,262 +190,256 @@
 
     <!-- Header -->
     <header class="app-header">
-        <span class="text-sm font-bold tracking-widest uppercase">旅行紀事</span>
-        <div class="text-[10px] font-bold border border-black px-2 py-1">2026.05.21 — 05.25</div>
+        <span class="text-sm font-bold tracking-[0.2em] uppercase serif">Travelogue</span>
+        <div class="text-[10px] font-bold border border-black px-3 py-1">2026.05.21 — 05.25</div>
     </header>
 
     <main class="scroll-container hide-scrollbar" id="mainScroll">
         
-        <!-- 概覽頁面 -->
-        <div id="view-home" class="section-content active">
+        <!-- 首頁分頁 -->
+        <div id="view-home" class="view-pane active">
             <section class="hero-section">
-                <p class="hero-subtitle">家族探索旅程</p>
-                <h1 class="hero-title serif">東京與富士山，<br>刻劃家族回憶的篇章。</h1>
-                <p class="text-xs text-sub mt-4 leading-relaxed font-light">
-                    從押上的晴空塔景觀到河口湖的溫泉湯煙，<br>這是一段為您與家人悉心準備的悠閒五日旅程。
-                </p>
+                <p class="hero-subtitle">Family Journey</p>
+                <h1 class="hero-title serif">東京與富士山，<br>與家人的輕裝慢旅。</h1>
             </section>
 
-            <!-- 飛機票卡片 -->
             <div class="flight-card">
-                <!-- 去程 -->
-                <div class="mb-8">
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="text-[10px] font-bold tracking-widest text-sub">去程航班</span>
-                        <span class="flight-code">虎航 IT700</span>
+                <div class="mb-10">
+                    <span class="text-[0.7rem] font-bold text-[#A89F91] uppercase tracking-widest">去程航班 • 虎航 IT700</span>
+                    <div class="flight-times">
+                        <div class="flight-city"><h2 class="serif">15:30</h2><p>台北 TPE</p></div>
+                        <div class="flight-line-spacer"></div>
+                        <div class="flight-city"><h2 class="serif">19:55</h2><p>東京 NRT</p></div>
                     </div>
-                    <div class="flight-row">
-                        <div class="text-left">
-                            <h2 class="text-2xl font-black serif">15:30</h2>
-                            <p class="text-[10px] font-bold">桃園 TPE</p>
-                        </div>
-                        <div class="flight-line"></div>
-                        <div class="text-right">
-                            <h2 class="text-2xl font-black serif">19:55</h2>
-                            <p class="text-[10px] font-bold">成田 NRT</p>
-                        </div>
-                    </div>
-                    <div class="mt-4 text-[10px] font-bold text-sub">本組行李限額：<span class="text-black">60 KG</span></div>
+                    <div class="flex justify-between text-[0.7rem] font-bold text-sub"><span>行李限額</span><span class="text-black">60 KG</span></div>
                 </div>
 
-                <div class="border-t border-gray-100 my-6"></div>
+                <div class="border-t border-gray-100 my-8"></div>
 
-                <!-- 回程 -->
                 <div>
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="text-[10px] font-bold tracking-widest text-sub">回程航班</span>
-                        <span class="flight-code">虎航 IT203</span>
+                    <span class="text-[0.7rem] font-bold text-[#A89F91] uppercase tracking-widest">回程航班 • 虎航 IT203</span>
+                    <div class="flight-times">
+                        <div class="flight-city"><h2 class="serif">19:30</h2><p>東京 NRT</p></div>
+                        <div class="flight-line-spacer"></div>
+                        <div class="flight-city"><h2 class="serif">22:35</h2><p>台北 TPE</p></div>
                     </div>
-                    <div class="flight-row">
-                        <div class="text-left">
-                            <h2 class="text-2xl font-black serif">19:30</h2>
-                            <p class="text-[10px] font-bold">成田 NRT</p>
-                        </div>
-                        <div class="flight-line"></div>
-                        <div class="text-right">
-                            <h2 class="text-2xl font-black serif">22:35</h2>
-                            <p class="text-[10px] font-bold">桃園 TPE</p>
-                        </div>
-                    </div>
-                    <div class="mt-4 text-[10px] font-bold text-sub">本組行李限額：<span class="text-black">80 KG</span></div>
+                    <div class="flex justify-between text-[0.7rem] font-bold text-sub"><span>行李限額</span><span class="text-black">80 KG</span></div>
                 </div>
             </div>
 
             <div class="px-6 pb-12">
-                <button onclick="switchTab('schedule')" class="w-full bg-black text-white py-5 text-[11px] font-bold tracking-[0.3em] uppercase">
-                    探索詳細行程表
+                <button onclick="switchTab('schedule')" class="w-full bg-black text-white py-5 text-xs font-bold tracking-[0.3em] uppercase transition-all">
+                    開啟詳細行程計畫
                 </button>
             </div>
         </div>
 
-        <!-- 行程計畫頁面 -->
-        <div id="view-schedule" class="section-content" style="display: none;">
-            <div class="sticky-date-nav">
+        <!-- 行程分頁 -->
+        <div id="view-schedule" class="view-pane" style="display: none;">
+            <div class="sticky-nav">
                 <div class="date-grid">
-                    <button class="date-btn active" onclick="showDay(1)">
-                        <span class="d-label">週四</span>
-                        <span class="d-num">21</span>
-                    </button>
-                    <button class="date-btn" onclick="showDay(2)">
-                        <span class="d-label">週五</span>
-                        <span class="d-num">22</span>
-                    </button>
-                    <button class="date-btn" onclick="showDay(3)">
-                        <span class="d-label">週六</span>
-                        <span class="d-num">23</span>
-                    </button>
-                    <button class="date-btn" onclick="showDay(4)">
-                        <span class="d-label">週日</span>
-                        <span class="d-num">24</span>
-                    </button>
-                    <button class="date-btn" onclick="showDay(5)">
-                        <span class="d-label">週一</span>
-                        <span class="d-num">25</span>
-                    </button>
+                    <button class="date-tab active" onclick="showDay(1)"><span>週四</span><span>21</span></button>
+                    <button class="date-tab" onclick="showDay(2)"><span>週五</span><span>22</span></button>
+                    <button class="date-tab" onclick="showDay(3)"><span>週六</span><span>23</span></button>
+                    <button class="date-tab" onclick="showDay(4)"><span>週日</span><span>24</span></button>
+                    <button class="date-tab" onclick="showDay(5)"><span>週一</span><span>25</span></button>
                 </div>
             </div>
 
-            <div id="schedule-container">
+            <div id="timeline-box" class="timeline-container">
+                <div class="timeline-v-line"></div>
                 
-                <!-- 第一天 -->
+                <!-- Day 1 (5/21) -->
                 <div id="day1-content" class="day-view active">
-                    <div class="timeline-wrapper">
-                        <div class="timeline-line"></div>
-                        <div class="timeline-item">
-                            <div class="timeline-marker"></div>
-                            <div class="event-card">
-                                <span class="time-tag">15:30 出發</span>
-                                <h3 class="event-title">桃園飛往成田</h3>
-                                <p class="event-desc">搭乘台灣虎航 IT700，開啟旅程。</p>
-                            </div>
+                    <div class="timeline-item">
+                        <div class="timeline-node"></div>
+                        <div class="event-card">
+                            <span class="time-capsule">15:30 出發</span>
+                            <h3 class="event-h">離台飛往成田</h3>
+                            <p class="event-p">搭乘虎航 IT700，開啟假期旅程。</p>
                         </div>
-                        <div class="timeline-item">
-                            <div class="timeline-marker"></div>
-                            <div class="event-card">
-                                <span class="time-tag">19:55 抵達</span>
-                                <h3 class="event-title">成田國際機場</h3>
-                                <p class="event-desc">辦理入境並提取行李後，搭乘特急列車往市區。</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-marker"></div>
-                            <div class="event-card stay-card-unified">
-                                <span class="time-tag stay-time-tag">16:00 後可入住</span>
-                                <h3 class="event-title">入住押上精緻民宿</h3>
-                                <p class="event-desc">東京都墨田區押上 3-2-11。安頓後可在附近享用宵夜。</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-node"></div>
+                        <div class="event-card stay-card">
+                            <span class="time-capsule stay-tag">16:00 入住開放</span>
+                            <h3 class="event-h">入住押上精緻民宿</h3>
+                            <p class="event-p">辦理自助入住並安頓行李。享受在東京的第一夜。</p>
+                            <div class="address-box">
+                                <i class="fa-solid fa-location-dot"></i> 東京都墨田區押上 3-2-11 おぎのビル
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 第二天 -->
+                <!-- Day 2 (5/22) -->
                 <div id="day2-content" class="day-view" style="display: none;">
-                    <div class="timeline-wrapper">
-                        <div class="timeline-line"></div>
-                        <div class="timeline-item">
-                            <div class="timeline-marker"></div>
-                            <div class="event-card">
-                                <span class="time-tag">上午行程</span>
-                                <h3 class="event-title">豪德寺 Gotokuji</h3>
-                                <p class="event-desc">探訪著名的「招福貓」發源地，漫步在成千上萬的小貓像中。</p>
+                    <div class="timeline-item">
+                        <div class="timeline-node"></div>
+                        <div class="event-card">
+                            <span class="time-capsule">上午時段</span>
+                            <h3 class="event-h">豪德寺 Gotokuji</h3>
+                            <p class="event-p">拜訪著名的「招福貓」發源地，漫步在寧靜的寺廟氛圍中。</p>
+                            <div class="address-box">
+                                <i class="fa-solid fa-location-dot"></i> 東京都世田谷區豪德寺 2-24-7
                             </div>
                         </div>
-                        <div class="timeline-item">
-                            <div class="timeline-marker"></div>
-                            <div class="event-card">
-                                <span class="time-tag">下午行程</span>
-                                <h3 class="event-title">東京市區探索</h3>
-                                <p class="event-desc">自由安排：探索新宿或澀谷的繁華景觀與購物。</p>
-                            </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-node"></div>
+                        <div class="event-card">
+                            <span class="time-capsule">下午時段</span>
+                            <h3 class="event-h">市區自由散策</h3>
+                            <p class="event-p">自由安排前往新宿、澀谷探索，感受東京的繁華魅力。</p>
                         </div>
-                        <div class="timeline-item">
-                            <div class="timeline-marker"></div>
-                            <div class="event-card stay-card-unified">
-                                <span class="time-tag stay-time-tag">住宿</span>
-                                <h3 class="event-title">押上精緻民宿</h3>
-                                <p class="event-desc">返回民宿休息，享受舒適的居家空間。</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-node"></div>
+                        <div class="event-card stay-card">
+                            <span class="time-capsule stay-tag">住宿</span>
+                            <h3 class="event-h">押上精緻民宿</h3>
+                            <div class="address-box">
+                                <i class="fa-solid fa-location-dot"></i> 東京都墨田區押上 3-2-11
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 第三天 -->
+                <!-- Day 3 (5/23) -->
                 <div id="day3-content" class="day-view" style="display: none;">
-                    <div class="timeline-wrapper">
-                        <div class="timeline-line"></div>
-                        <div class="timeline-item">
-                            <div class="timeline-marker"></div>
-                            <div class="event-card">
-                                <span class="time-tag">上午行程</span>
-                                <h3 class="event-title">淺草寺參拜</h3>
-                                <p class="event-desc">穿過雷門大提燈，在仲見世通體驗淺草江戶風情。</p>
+                    <div class="timeline-item">
+                        <div class="timeline-node"></div>
+                        <div class="event-card">
+                            <span class="time-capsule">上午時段</span>
+                            <h3 class="event-h">淺草寺參拜</h3>
+                            <p class="event-p">穿過雷門大提燈，在仲見世通感受古都歷史氛圍。</p>
+                            <div class="address-box">
+                                <i class="fa-solid fa-location-dot"></i> 東京都台東區淺草 2-3-1
                             </div>
                         </div>
-                        <div class="timeline-item">
-                            <div class="timeline-marker"></div>
-                            <div class="event-card gourmet-card">
-                                <span class="time-tag gourmet-time-tag">精選美食</span>
-                                <h3 class="event-title">PATISSERIE TEN&</h3>
-                                <p class="event-desc">位於押上的精緻法式甜點店（パティスリーテンアンド）。在晴空塔散策之餘，品嚐一份高品質的創意糕點。</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-node"></div>
+                        <div class="event-card gourmet-card">
+                            <span class="time-capsule gourmet-tag">精選美食</span>
+                            <h3 class="event-h">PATISSERIE TEN&</h3>
+                            <p class="event-p">造訪位於押上的法式甜點名店（パティスリーテンアンド）。</p>
+                            <div class="address-box">
+                                <span class="hours-text">營業時間：11:00 – 18:00</span>
+                                <i class="fa-solid fa-location-dot"></i> 東京都墨田區押上 3-11-1
                             </div>
                         </div>
-                        <div class="timeline-item">
-                            <div class="timeline-marker"></div>
-                            <div class="event-card">
-                                <span class="time-tag">傍晚 / 晚間</span>
-                                <h3 class="event-title">晴空塔 Skytree</h3>
-                                <p class="event-desc">民宿旁的經典地標。登塔俯瞰夜景或在 Solamachi 商場選購伴手禮。</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-node"></div>
+                        <div class="event-card">
+                            <span class="time-capsule">傍晚時段</span>
+                            <h3 class="event-h">晴空塔 Skytree</h3>
+                            <p class="event-p">登塔俯瞰東京夜景，或在 Solamachi 選購伴手禮。</p>
+                            <div class="address-box">
+                                <i class="fa-solid fa-location-dot"></i> 東京都墨田區押上 1-1-2
                             </div>
                         </div>
-                        <div class="timeline-item">
-                            <div class="timeline-marker"></div>
-                            <div class="event-card stay-card-unified">
-                                <span class="time-tag stay-time-tag">住宿</span>
-                                <h3 class="event-title">押上精緻民宿</h3>
-                                <p class="event-desc">整理行李準備明天的自駕行程。</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-node"></div>
+                        <div class="event-card stay-card">
+                            <span class="time-capsule stay-tag">住宿</span>
+                            <h3 class="event-h">押上精緻民宿</h3>
+                            <div class="address-box">
+                                <i class="fa-solid fa-location-dot"></i> 東京都墨田區押上 3-2-11
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 第四天 -->
+                <!-- Day 4 (5/24) 下午行程拆卡片 -->
                 <div id="day4-content" class="day-view" style="display: none;">
-                    <div class="timeline-wrapper">
-                        <div class="timeline-line"></div>
-                        <div class="timeline-item">
-                            <div class="timeline-marker"></div>
-                            <div class="event-card stay-card-unified">
-                                <span class="time-tag stay-time-tag">11:00 退房</span>
-                                <h3 class="event-title">押上民宿退房 ➔ 自駕啟程</h3>
-                                <p class="event-desc">辦理退房並前往租車點開啟富士山自駕之旅。</p>
+                    <div class="timeline-item">
+                        <div class="timeline-node"></div>
+                        <div class="event-card stay-card">
+                            <span class="time-capsule stay-tag">11:00 前退房</span>
+                            <h3 class="event-h">民宿退房 ➔ 自駕啟程</h3>
+                            <p class="event-p">辦理退房並前往租車點取車。駛向富士山河口湖區域。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-node"></div>
+                        <div class="event-card">
+                            <span class="time-capsule">富士名勝 (一)</span>
+                            <h3 class="event-h">新倉山淺間公園</h3>
+                            <p class="event-p">拍攝經典的「五重塔＋富士山」同框大景，挑戰 398 階階梯。</p>
+                            <div class="address-box">
+                                <i class="fa-solid fa-location-dot"></i> 山梨縣富士吉田市新倉 3353
                             </div>
                         </div>
-                        <div class="timeline-item">
-                            <div class="timeline-marker"></div>
-                            <div class="event-card">
-                                <span class="time-tag">下午行程</span>
-                                <h3 class="event-title">富士名勝巡禮</h3>
-                                <p class="event-desc">造訪新倉山淺間公園、忍野八海以及河口湖大石公園。</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-node"></div>
+                        <div class="event-card">
+                            <span class="time-capsule">富士名勝 (二)</span>
+                            <h3 class="event-h">忍野八海</h3>
+                            <p class="event-p">探訪清澈見底的神聖湧泉池，漫步傳統日式合掌屋村落。</p>
+                            <div class="address-box">
+                                <i class="fa-solid fa-location-dot"></i> 山梨縣南都留郡忍野村
                             </div>
                         </div>
-                        <div class="timeline-item">
-                            <div class="timeline-marker"></div>
-                            <div class="event-card stay-card-unified">
-                                <span class="time-tag stay-time-tag">19:00 前辦理入住</span>
-                                <h3 class="event-title">湯煙富士之宿 大池飯店</h3>
-                                <p class="event-desc">入住河口湖經典溫泉旅宿，享受展望露天溫泉。</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-node"></div>
+                        <div class="event-card">
+                            <span class="time-capsule">富士名勝 (三)</span>
+                            <h3 class="event-h">河口湖大石公園</h3>
+                            <p class="event-p">漫步湖畔步道，欣賞壯麗的富士山湖景與四季花卉。</p>
+                            <div class="address-box">
+                                <i class="fa-solid fa-location-dot"></i> 山梨縣南都留郡富士河口湖町大石 2585
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-node"></div>
+                        <div class="event-card stay-card">
+                            <span class="time-capsule stay-tag">19:00 前辦理入住</span>
+                            <h3 class="event-h">湯煙富士之宿 大池飯店</h3>
+                            <p class="event-p">入住經典溫泉旅館。享受展望露天風呂，洗去旅途疲憊。</p>
+                            <div class="address-box">
+                                <i class="fa-solid fa-location-dot"></i> 山梨縣南都留郡富士河口湖町船津 6713-103
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 第五天 -->
+                <!-- Day 5 (5/25) -->
                 <div id="day5-content" class="day-view" style="display: none;">
-                    <div class="timeline-wrapper">
-                        <div class="timeline-line"></div>
-                        <div class="timeline-item">
-                            <div class="timeline-marker"></div>
-                            <div class="event-card stay-card-unified">
-                                <span class="time-tag stay-time-tag">11:00 退房</span>
-                                <h3 class="event-title">晨起溫泉與退房</h3>
-                                <p class="event-desc">享用飯店早餐後辦理退房，前往御殿場地區。</p>
+                    <div class="timeline-item">
+                        <div class="timeline-node"></div>
+                        <div class="event-card stay-card">
+                            <span class="time-capsule stay-tag">11:00 前退房</span>
+                            <h3 class="event-h">飯店退房</h3>
+                            <p class="event-p">享用飯店早餐後辦理退房，準備前往御殿場。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-node"></div>
+                        <div class="event-card">
+                            <span class="time-capsule">中午時段</span>
+                            <h3 class="event-h">御殿場 Outlet</h3>
+                            <p class="event-p">最後購物衝刺，採購名牌與精品。欣賞最後的富士山景。</p>
+                            <div class="address-box">
+                                <i class="fa-solid fa-location-dot"></i> 靜岡縣御殿場市深澤 1312
                             </div>
                         </div>
-                        <div class="timeline-item">
-                            <div class="timeline-marker"></div>
-                            <div class="event-card">
-                                <span class="time-tag">中午 / 下午</span>
-                                <h3 class="event-title">御殿場 Outlet</h3>
-                                <p class="event-desc">最後購物衝刺，採購各式精品與日式伴手禮。</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-marker"></div>
-                            <div class="event-card">
-                                <span class="time-tag">16:30 報到</span>
-                                <h3 class="event-title">抵達機場 ➔ 返台</h3>
-                                <p class="event-desc">搭乘 IT203 (19:30 起飛)。帶著滿滿回憶與戰利品平安回家。</p>
-                            </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-node"></div>
+                        <div class="event-card">
+                            <span class="time-capsule">19:30 起飛</span>
+                            <h3 class="event-h">抵達機場 ➔ 返台</h3>
+                            <p class="event-p">16:30 機場報到（IT203）。帶著滿滿回憶與戰利品平安回家。</p>
                         </div>
                     </div>
                 </div>
@@ -451,12 +449,12 @@
     </main>
 
     <!-- 底部導航 -->
-    <nav class="footer-nav">
-        <button class="nav-link active" id="tab-home" onclick="switchTab('home')">
+    <nav class="footer-tabs">
+        <button class="tab-item active" id="tab-home" onclick="switchTab('home')">
             <i class="fa-solid fa-compass"></i>
             <span>概覽</span>
         </button>
-        <button class="nav-link" id="tab-schedule" onclick="switchTab('schedule')">
+        <button class="tab-item" id="tab-schedule" onclick="switchTab('schedule')">
             <i class="fa-solid fa-list-ul"></i>
             <span>行程</span>
         </button>
@@ -464,8 +462,8 @@
 
     <script>
         function switchTab(tabName) {
-            document.querySelectorAll('.section-content').forEach(el => el.style.display = 'none');
-            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.view-pane').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.tab-item').forEach(el => el.classList.remove('active'));
             
             document.getElementById('view-' + tabName).style.display = 'block';
             document.getElementById('tab-' + tabName).classList.add('active');
@@ -474,9 +472,9 @@
         }
 
         function showDay(dayNum) {
-            document.querySelectorAll('.date-btn').forEach((btn, idx) => {
-                if(idx === dayNum - 1) btn.classList.add('active');
-                else btn.classList.remove('active');
+            document.querySelectorAll('.date-tab').forEach((tab, idx) => {
+                if(idx === dayNum - 1) tab.classList.add('active');
+                else tab.classList.remove('active');
             });
 
             document.querySelectorAll('.day-view').forEach((view, idx) => {
