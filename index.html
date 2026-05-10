@@ -21,11 +21,17 @@
             --nav-height: calc(60px + var(--safe-area-bottom));
         }
 
+        html, body {
+            height: 100%;
+        }
+
         body {
             font-family: 'Noto Sans TC', sans-serif;
             background-color: var(--bg-base);
             color: var(--text-main);
             margin: 0; padding: 0;
+            height: 100vh;
+            height: 100dvh;
             min-height: 100vh;
             min-height: 100dvh;
             display: flex;
@@ -51,6 +57,7 @@
         /* --- 容器 --- */
         .scroll-container {
             flex: 1;
+            min-height: 0;
             overflow-y: auto;
             padding-bottom: var(--nav-height);
             scroll-behavior: smooth;
